@@ -60,25 +60,30 @@ public class Hangman {
         RandomWord randomWord = new RandomWord();
         WordComparator wordComparator = new WordComparator();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Type a letter or word: ");
-        String userAnswer = scanner.next();
+        int counter = 0;
+        do {
+            System.out.println("Type a letter or word: ");
+            String userAnswer = scanner.next();
 
-        boolean finalDecision = false;
+            boolean finalResult = false;
 
-        if (userAnswer.length()==1){
-            finalDecision = wordComparator.compareLetters(randomWord.returnWord(), userAnswer);
-        } else if (userAnswer.length()>1) {
-           finalDecision = wordComparator.compareWords(randomWord.returnWord(), userAnswer);
-        } else {
-            System.out.println("Error!");
-        }
+            if (userAnswer.length() == 1) {
+                finalResult = wordComparator.compareLetters(randomWord.returnWord(), userAnswer);
+                if (finalResult == false){
+                    counter++;
+                }
+            } else if (userAnswer.length() > 1) {
+                finalResult = wordComparator.compareWords(randomWord.returnWord(), userAnswer);
+                if (finalResult == false){
+                    counter++;
+                }
+            } else {
+                System.out.println("Error!");
+            }
 
-        Screen screen = nee Screen();
-        screen.showsth(false);
-
-//        boolean result = wordComparator.compare(randomWord.returnWord(), userAnswer);
-//        System.out.println(result);
-
+            Screen screen = new Screen();
+            screen.updateScreen(finalResult, counter);
+        } while (counter < 6);
 
     }
 }

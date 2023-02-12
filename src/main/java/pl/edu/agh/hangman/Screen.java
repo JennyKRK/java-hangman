@@ -21,21 +21,21 @@ public class Screen {
     Screen(){
      }
 
-    public void updateScreen(boolean result){
+    public void updateScreen(boolean result, int counter){
 
         String[] pictures = Hangman.HANGMANPICS;
         String currentPicture = "";
-        int counter = 0;
-        if (result == true){
-            counter ++;
+        if (result == false){
             currentPicture = pictures[counter];
             System.out.println(currentPicture);
             System.out.println("Sorry, letter was not found");
+            System.out.println();
         }
         else {
             currentPicture = pictures[counter];
             System.out.println(currentPicture);
             System.out.println("Your letter was found");
+            System.out.println();
         }
     }
 
