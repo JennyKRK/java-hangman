@@ -55,5 +55,9 @@ public class Hangman {
     };
 
     public static void main(String[] args) {
+        WordComparator test = new WordComparator();
+        boolean result = test.compare("anna", "n");
+        System.out.println(result);
+
     }
 }
