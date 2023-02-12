@@ -13,7 +13,7 @@ public class WordComparator {
         return splitedWord;
     }
 
-    public boolean compare(String randomWord, String userLetter) {
+    public boolean compareLetters(String randomWord, String userLetter) {
         String[] splitedWord = splitWordToLetters(randomWord);
         boolean result = false;
 
@@ -23,7 +23,14 @@ public class WordComparator {
             }
         }
         return result;
+    }
 
+    public boolean compareWords (String randomWord, String userLetter) {
+        boolean result = false;
+        if (randomWord.toLowerCase().equals(userLetter.toLowerCase())){
+            result = true;
+        }
+            return result;
     }
 
 }
