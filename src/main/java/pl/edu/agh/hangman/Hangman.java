@@ -1,5 +1,7 @@
 package pl.edu.agh.hangman;
 
+import java.util.Scanner;
+
 public class Hangman {
 
     public static final String[] HANGMANPICS = new String[]{
@@ -55,12 +57,15 @@ public class Hangman {
     };
 
     public static void main(String[] args) {
+        RandomWord randomWord = new RandomWord();
+        WordComparator wordComparator = new WordComparator();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Type a letter or word: ");
+        String userLetter = scanner.next();
 
+        boolean result = wordComparator.compare(randomWord.returnWord(), userLetter);
+        System.out.println(result);
 
-        //  TEST DO WORDCOMPARATOR
-//        WordComparator test = new WordComparator();
-//        boolean result = test.compare("anna", "n");
-//        System.out.println(result);
 
     }
 }

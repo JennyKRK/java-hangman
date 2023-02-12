@@ -15,6 +15,7 @@ public class WordComparator {
 
     public boolean compare(String randomWord, String userLetter) {
         String[] splitedWord = splitWordToLetters(randomWord);
+        userLetter.toLowerCase();
         boolean result = false;
 
         for (String letter : splitedWord) {
