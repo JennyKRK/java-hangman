@@ -61,10 +61,23 @@ public class Hangman {
         WordComparator wordComparator = new WordComparator();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Type a letter or word: ");
-        String userLetter = scanner.next();
+        String userAnswer = scanner.next();
 
-        boolean result = wordComparator.compare(randomWord.returnWord(), userLetter);
-        System.out.println(result);
+        boolean finalDecision = false;
+
+        if (userAnswer.length()==1){
+            finalDecision = wordComparator.compareLetters(randomWord.returnWord(), userAnswer);
+        } else if (userAnswer.length()>1) {
+           finalDecision = wordComparator.compareWords(randomWord.returnWord(), userAnswer);
+        } else {
+            System.out.println("Error!");
+        }
+
+        Screen screen = nee Screen();
+        screen.showsth(false);
+
+//        boolean result = wordComparator.compare(randomWord.returnWord(), userAnswer);
+//        System.out.println(result);
 
 
     }
