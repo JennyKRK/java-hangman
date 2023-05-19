@@ -1,9 +1,11 @@
 package pl.edu.agh.hangman;
 
+import java.util.List;
 import java.util.Random;
 import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class RandomWord {
 
@@ -17,7 +19,7 @@ public class RandomWord {
             File newFile = new File(filename);
             Scanner scanner = new Scanner(newFile);
             while (scanner.hasNext()) {
-                String line = scanner.next().trim();
+                String line = scanner.nextLine().replaceAll("[()/]", "").replace("  "," ").trim();
                 words.add(line);
             }
             scanner.close();
@@ -27,19 +29,24 @@ public class RandomWord {
         return words;
     }
 
-    public String returnWordFromArray(ArrayList listOfWords){
+    public String returnWord(){
+        List listOfWords = returnListOfWords();
         Random random = new Random();
         int maxIndex = listOfWords.size() ;
-        int chosenIndex = random.nextInt(0, maxIndex);
+        int chosenIndex = random.nextInt(maxIndex);
         String chosenWord = listOfWords.get(chosenIndex).toString();
         return chosenWord;
     }
 
-    public String returnWord(){
-        String result = returnWordFromArray(returnListOfWords());
-        return result;
+    public String returnWord(int i){
+        List<String> listOfWords = returnListOfWords();
+        List<String> newListOfWords = listOfWords.stream().filter(w -> w.length() == i).collect(Collectors.toList());
+        Random random = new Random();
+        int maxIndex = newListOfWords.size() ;
+        int chosenIndex = random.nextInt(maxIndex);
+        String chosenWord = newListOfWords.get(chosenIndex).toString();
+        return chosenWord;
     }
-
 }
 
 

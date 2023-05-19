@@ -1,8 +1,6 @@
 package pl.edu.agh.hangman;
 
-import java.util.Scanner;
-
-public class Hangman {
+public class HangmanScreen {
 
     public static final String[] HANGMANPICS = new String[]{
             "  +---+\n" +
@@ -56,34 +54,31 @@ public class Hangman {
                     "========"
     };
 
-    public static void main(String[] args) {
-        RandomWord randomWord = new RandomWord();
-        WordComparator wordComparator = new WordComparator();
-        Scanner scanner = new Scanner(System.in);
-        int counter = 0;
-        do {
-            System.out.println("Type a letter or word: ");
-            String userAnswer = scanner.next();
 
-            boolean finalResult = false;
+    public void printWelcomeScreen(){
+        System.out.println("Hello. Please type one letter. You can also type your solution");
+        System.out.println("Good luck!");
+    }
 
-            if (userAnswer.length() == 1) {
-                finalResult = wordComparator.compareLetters(randomWord.returnWord(), userAnswer);
-                if (finalResult == false){
-                    counter++;
-                }
-            } else if (userAnswer.length() > 1) {
-                finalResult = wordComparator.compareWords(randomWord.returnWord(), userAnswer);
-                if (finalResult == false){
-                    counter++;
-                }
-            } else {
-                System.out.println("Error!");
-            }
+    public void printCongratulations(){
+        System.out.println("YOU WON THE GAME");
+    }
 
-            Screen screen = new Screen();
-            screen.updateScreen(finalResult, counter);
-        } while (counter < 6);
+    public void printHangManVersion(int guessesMade){
+        System.out.println("Bad luck!");
+        System.out.println(HANGMANPICS[guessesMade]);
+        int guessesLeft = 6 - guessesMade;
+        System.out.println("Guesses left: " + guessesLeft);
+    }
 
+    public void printGoodStatus(String currentStatus,int guessesMade){
+        System.out.println("Your guess was correct");
+        System.out.println(currentStatus);
+        int guessesLeft = 6 - guessesMade;
+        System.out.println("Guesses left: " + guessesLeft);
+    }
+
+    public void finishTheGame(){
+        System.out.println("Sorry. You lost.");
     }
 }
