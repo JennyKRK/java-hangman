@@ -25,32 +25,39 @@ public class Game {
         System.out.println("Please type N for normal game. L if you want to specify the length of the word.");
         System.out.println("E if you want to use externally-generated word. X if you want to exit");
         String answer = scanner.nextLine();
-        switch(answer){
-            case("N"): {
-                String word = getTheWord();
-                playAGame(word);
-                break;
-            }
-            case("X"):{
-                System.exit(0);
-            }
-            case("E"):{
-                String word = getTheWordFromWordnik();
-                playAGame(word);
-                break;
-            }
-            case("L"):{
-                System.out.println("Please give me the number");
-                int length = scanner.nextInt();
-                //to add - error handling
-                String word = getTheWord(length);
-                playAGame(word);
-                break;
-            }
-            default:{
-                System.out.println("Wrong answer");
+        try {
+            switch (answer) {
+                case ("N"): {
+                    String word = getTheWord();
+                    playAGame(word);
+                    break;
+                }
+                case ("X"): {
+                    System.exit(0);
+                }
+                case ("E"): {
+                    String word = getTheWordFromWordnik();
+                    playAGame(word);
+                    break;
+                }
+                case ("L"): {
+                    System.out.println("Please give me the number");
+                    int length = scanner.nextInt();
+                    //to add - error handling
+                    String word = getTheWord(length);
+                    playAGame(word);
+                    break;
+                }
+                default: {
+                    System.out.println("Wrong answer");
+                }
             }
         }
+        catch (Exception e){
+            System.out.println("No word with this length. The game will begin from anew");
+            beginTheGame();
+        }
+        doYouWantToPlayAgain();
     }
 
     public String getTheWord(){
@@ -114,6 +121,18 @@ public class Game {
 
     public void currentStatus(String alreadyKnown, int guessesMade){
         hs.printGoodStatus(alreadyKnown, guessesMade);
+    }
+
+    public void doYouWantToPlayAgain() throws IOException {
+        System.out.println("Do you want a new game? Type yes");
+        Scanner scanner = new Scanner(System.in);
+        String answer = scanner.nextLine();
+        if (answer.toLowerCase().equals("yes")){
+            beginTheGame();
+        }
+        else {
+            System.out.println("Goodbye");
+        }
     }
 
 
